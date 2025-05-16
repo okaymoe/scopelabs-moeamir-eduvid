@@ -51,33 +51,38 @@ export function VideoForm() {
   })
 
   async function onSubmit(values: VideoFormValues) {
-    setIsSubmitting(true)
-  
-    try {
-      await createVideo(values)
-  
-      const videos = await getVideos()
-      const latest = videos[videos.length - 1]
-  
-      if (!latest || !latest.id) {
-        throw new Error("Video not found after creation")
-      }
-  
-      toast.success("Video created successfully!", {
-        description: "Your video has been added to the platform.",
-      })
-  
-      router.push(`/videos/${latest.id}`)
-    } catch (error) {
-      console.error("Error creating video:", error)
-  
-      toast.error("Failed to create video", {
-        description: "There was an error creating your video. Please try again.",
-      })
-    } finally {
-      setIsSubmitting(false)
+  setIsSubmitting(true);
+
+  try {
+    await createVideo(values);
+
+    const videos = await getVideos();
+
+    const sorted = videos.sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
+
+    const newest = sorted[0];
+    if (!newest?.id) {
+      throw new Error("Could not determine newly created video");
     }
+
+    toast.success("Video created successfully!", {
+      description: "Your video has been added to the platform.",
+    });
+
+    router.push(`/videos/${newest.id}`);
+  } catch (error) {
+    console.error("Error creating video:", error);
+
+    toast.error("Failed to create video", {
+      description: "There was an error creating your video. Please try again.",
+    });
+  } finally {
+    setIsSubmitting(false);
   }
+}
   
 
   return (

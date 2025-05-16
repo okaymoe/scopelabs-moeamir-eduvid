@@ -47,18 +47,15 @@ export async function getVideos(userId: string = USER_ID): Promise<Video[]> {
 
 
 export async function getVideoById(id: string): Promise<Video> {
-  const response = await fetch(`${API_BASE_URL}/videos/single?video_id=${id}`, {
-    cache: "no-store",
-  })
-
+  const response = await fetch(
+    `${API_BASE_URL}/videos/single?video_id=${id}`,
+    { cache: "no-store" }
+  );
   if (!response.ok) {
-    throw new Error(`Failed to fetch video: ${response.status}`)
+    throw new Error(`Failed to fetch video: ${response.status}`);
   }
-
-  const data = await response.json()         
-  const vid = data.video                   
-  if (!vid) throw new Error("Malformed response from getVideoById")
-  return vid                             
+  const data = await response.json();
+  return data.video;                   
 }
 
 
