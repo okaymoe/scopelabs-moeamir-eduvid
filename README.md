@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# EduVid
 
-## Getting Started
+Educational Video Platform built with Next.js 14, React, and Tailwind CSS. Some components packaged from shadcn.
 
-First, run the development server:
+## Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+EduVid allows users to:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- View a grid of educational videos sorted by newest first
+- Watch videos with a custom player (fullscreen, playback speed, volume control)
+- Create new video entries with title, description, and video URL
+- Edit existing videos
+- Comment on videos and view comments from others
+- View all videos by a specific user
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*Note: Screenshots coming soon!*
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Tech Stack
 
-## Learn More
+- Next.js 15 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS for styling
+- Framer Motion for animations
+- Sonner for toast notifications
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Home Page (/)**: Displays a responsive grid of video cards
+- **Video Player**: Custom controls (play/pause, skip, volume, speed, fullscreen)
+- **Create Video (/videos/create)**: Form with Zod validation
+- **Edit Video (/videos/edit/[id])**: Pre-filled form for updates
+- **Comments**: Add and list comments under each video
+- **User Page (/users/[userId])**: List all videos by a user
+- **Splash Screen**: Animated intro before loading the app (6s)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Installation
 
-## Deploy on Vercel
+Clone the repository:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    git clone https://github.com/your-username/eduvid.git
+    cd eduvid
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Install dependencies:
+
+    npm install
+
+Run the development server:
+
+    npm run dev
+
+Open http://localhost:3000 in your browser.
+
+## Usage
+
+- **Browse Videos**: Landing page shows all videos. Click a card to watch.
+- **Create Video**: Click "+ New Video" in the header or visit /videos/create.
+- **Edit Video**: On a video page, click "Edit" to update details.
+- **Comment**: Fill out the comment form under the player to post.
+- **View User Videos**: Click a user's name on any card or video page.
+
+## Some Project Structure
+
+    ├── app/
+    │   ├── layout.tsx       # Root layout with theme, header, footer, splash
+    │   ├── globals.css      # Global styles
+    │   ├── page.tsx         # Home page
+    │   ├── videos/
+    │   │   ├── create/      # New video form
+    │   │   ├── [id]/        # Video detail + comments
+    │   │   └── edit/[id]/   # Edit video page
+    │   └── users/[userId]/  # User's videos
+    ├── src/
+    │   ├── components/      # Reusable UI components, most custom made and some from Shadcn
+    │   ├── lib/             # API helpers & utils
+    │   └── styles/          # Tailwind config
+    └── README.md            # This file
+
+## Environment Variables
+
+No environment variables are required. The API endpoint is hardcoded to the provided FastAPI server.
