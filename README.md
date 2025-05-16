@@ -17,12 +17,12 @@ EduVid allows users to:
 
 ## Tech Stack
 
-- Next.js 15 (App Router)
-- React 19
+- React/Next.js 14 (App Router)
 - TypeScript
 - Tailwind CSS for styling
 - Framer Motion for animations
 - Sonner for toast notifications
+- Shadcn for boilerplate modules
 
 ## Features
 
